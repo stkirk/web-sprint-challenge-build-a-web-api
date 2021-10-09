@@ -92,22 +92,22 @@ The description of the structure and extra information about each _resource_ sto
 
 #### Projects
 
-| Field       | Data Type | Metadata                                                                    |
-| ----------- | --------- | --------------------------------------------------------------------------- |
-| id          | number    | do not provide it when creating projects, the database will generate it     |
-| name        | string    | required                                                                    |
-| description | string    | required                                                                    |
-| completed   | boolean   | not required, defaults to false when creating projects                      |
+| Field       | Data Type | Metadata                                                                |
+| ----------- | --------- | ----------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating projects, the database will generate it |
+| name        | string    | required                                                                |
+| description | string    | required                                                                |
+| completed   | boolean   | not required, defaults to false when creating projects                  |
 
 #### Actions
 
-| Field       | Data Type | Metadata                                                                                         |
-| ----------- | --------- | ------------------------------------------------------------------------------------------------ |
-| id          | number    | do not provide it when creating actions, the database will generate it                           |
-| project_id  | number    | required, must be the id of an existing project                                                  |
-| description | string    | required, up to 128 characters long                                                              |
-| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action  |
-| completed   | boolean   | not required, defaults to false when creating actions                                            |
+| Field       | Data Type | Metadata                                                                                        |
+| ----------- | --------- | ----------------------------------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating actions, the database will generate it                          |
+| project_id  | number    | required, must be the id of an existing project                                                 |
+| description | string    | required, up to 128 characters long                                                             |
+| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action |
+| completed   | boolean   | not required, defaults to false when creating actions                                           |
 
 ### Database Persistence Helpers
 
@@ -147,7 +147,27 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+
+- Node.js is a runtime for Javascript outside of the browser. It allows us to use Javascript to write applications such as servers so that both the client and backend of an app use the same programming language. Notable features of Node are use of javascript on front and back end, async nature of javascript, and access to node package manager library (npm). Express is a Node module that makes it easier to build RESTful web services on top of Node. The main features of Express are Middleware, Routers, and Convenience Helpers.
+
+2. Understand and explain the use of Middleware.
+
+- Middleware can be built-in, third party (via npm), or custom made. Middleware extends functionality of Express. The totality of middleware in an application can be considered an array of functions that have access to the request and response objects and are exectued in order on the request until it is a response is sent. Middleware can validate, alter, ad to, and respond to a request. It is great for taking trips to a database for needed information, validation, and error handling.
+
+3. The basic principles of the REST architectural style.
+
+- RESTful architecture, or Representational State Transfer, is an API style with 6 core constraints:
+  1. Uniform Interface - each resource on has one URI that can be interacted with a common approach (GET, POST, DELETE, PUT, etc.)
+  2. Seperation of client and server
+  3. Stateless - the server won't store anything about the latest client HTTP request and treats each request as new. This makes the client responsible for the state of the application
+  4. Cacheable - use caching to eliminate some client-server interaction
+  5. Layered System, seperation of concerns on servers. Seperate servers for APIs, databases - authentication, etc.
+  6. Code on demand - can return executable code to support the app
+
+4. Understand and explain the use of Express Routers.
+
+- Express Routers keep endpoints for each resource separated and organized. It is a piece of middleware that allows a resource to have a base url in the main server file that 'routes' each request through the supplied router middleware.
+
+5. Describe tooling used to manually test the correctness of an API.
+
+- Postman is a GUI application for more complicated requests, such as POST or PUT requests with intricate request bodies. HTTpie is a commandline tool for making quick requests to the API

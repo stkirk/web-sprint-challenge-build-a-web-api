@@ -17,7 +17,6 @@ const checkActionById = (req, res, next) => {
     .catch(next);
 };
 
-//check project db to see if project_id is valid
 const checkActionPayload = (req, res, next) => {
   console.log("verifying Actions payload...");
   const newAction = req.body;
