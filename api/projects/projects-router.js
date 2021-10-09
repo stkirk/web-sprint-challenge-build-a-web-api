@@ -28,4 +28,21 @@ router.post("/", checkProjectPayload, (req, res, next) => {
     .catch(next);
 });
 
+router.put("/:id", checkProjectById, checkProjectPayload, (req, res, next) => {
+  const updatedProject = req.body;
+
+  if (typeof updatedProject.completed === "boolean") {
+    Projects.update(req.params.id, updatedProject)
+      .then((updatedProject) => {
+        res.status(200).json(updatedProject);
+      })
+      .catch(next);
+  } else {
+    next({
+      status: 400,
+      message: "project completed property required type boolean",
+    });
+  }
+});
+
 module.exports = router;
