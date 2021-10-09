@@ -33,4 +33,14 @@ router.put("/:id", checkActionById, checkActionPayload, (req, res, next) => {
     .catch(next);
 });
 
+router.delete("/:id", checkActionById, (req, res, next) => {
+  Actions.remove(req.params.id)
+    .then(() => {
+      res
+        .status(200)
+        .json({ message: `action with id ${req.params.id} nuked` });
+    })
+    .catch(next);
+});
+
 module.exports = router;
