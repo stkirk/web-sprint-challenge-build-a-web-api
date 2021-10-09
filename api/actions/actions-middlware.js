@@ -17,13 +17,17 @@ const checkActionById = (req, res, next) => {
     .catch(next);
 };
 
+//check project db to see if project_id is valid
 const checkActionPayload = (req, res, next) => {
   console.log("verifying Actions payload...");
   const newAction = req.body;
 
   if (!newAction.project_id || !newAction.description || !newAction.notes) {
-    next({ status: 400, message: "action name and description required!" });
-  } else if (newAction.description > 128) {
+    next({
+      status: 400,
+      message: "project_id, description, and notes required!",
+    });
+  } else if (newAction.description.length > 128) {
     next({ status: 400, message: "action description limit 128 chars" });
   } else {
     next();

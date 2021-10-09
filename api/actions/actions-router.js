@@ -25,4 +25,12 @@ router.post("/", checkActionPayload, (req, res, next) => {
     .catch(next);
 });
 
+router.put("/:id", checkActionById, checkActionPayload, (req, res, next) => {
+  Actions.update(req.params.id, req.body)
+    .then((updatedAction) => {
+      res.status(200).json(updatedAction);
+    })
+    .catch(next);
+});
+
 module.exports = router;
